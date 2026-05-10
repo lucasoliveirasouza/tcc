@@ -1,0 +1,1 @@
+SELECT hora_aula_media_p FROM calc_hora_aula_media WHERE LOWER(area_ingresso) LIKE LOWER('%biologia geral%') AND LOWER(sigla_campus) = LOWER('sen') AND ano = 2020 AND semestre = 2

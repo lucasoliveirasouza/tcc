@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT s.pk_siape) AS total_servidores FROM servidor s JOIN servidor_proj sp ON s.pk_siape = sp.fk_siape JOIN proj p ON sp.fk_proj = p.pk WHERE LOWER(s.area_ingresso) LIKE LOWER('%administra%') AND LOWER(s.genero) = LOWER('feminino') AND LOWER(p.tipo_projeto) = LOWER('ensino') AND p.data_inicio >= DATE('now', '-5 years') AND s.sigla_campus = 'ANA'

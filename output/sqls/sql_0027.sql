@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT s.pk_siape) AS qtd_servidores FROM servidor s JOIN calc_hora_aula_media c ON s.pk_siape = c.siape WHERE LOWER(c.area_ingresso) = LOWER('biologia geral') AND LOWER(c.sigla_campus) = LOWER('for') AND c.ano = 2020 AND c.semestre = 2

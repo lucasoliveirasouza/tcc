@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM servidor s WHERE s.contrato = 'EFETIVOS' AND s.sigla_campus = 'ITU' AND LOWER(s.area_ingresso) LIKE LOWER('%letras%') AND EXISTS (SELECT 1 FROM calc_hora_aula_media c WHERE c.siape = s.pk_siape AND c.ano = 2024 AND c.semestre = 1) AND s.saiu_do_ifg = FALSE

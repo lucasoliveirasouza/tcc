@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM servidor s WHERE LOWER(s.contrato) = LOWER('efetivos') AND LOWER(s.area_ingresso) = LOWER('geografia') AND LOWER(s.sigla_campus) = LOWER('lin') AND s.pk_siape IN (SELECT chm.siape FROM calc_hora_aula_media chm WHERE chm.ano = 2021 AND chm.semestre = 2 AND LOWER(chm.sigla_campus) = LOWER('lin')) AND s.saiu_do_ifg = FALSE

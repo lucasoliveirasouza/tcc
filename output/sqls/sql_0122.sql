@@ -1,0 +1,1 @@
+SELECT AVG(cham.hora_aula_media) AS media_hora_aula FROM calc_hora_aula_media cham WHERE LOWER(cham.sigla_campus) = LOWER('luz') AND LOWER(cham.area_ingresso) = LOWER('letras') AND cham.ano = 2023 AND cham.semestre = 1

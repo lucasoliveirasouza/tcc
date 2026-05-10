@@ -1,0 +1,1 @@
+SELECT AVG(cham.hora_aula_media_p) AS media_horas_aula_padronizada FROM calc_hora_aula_media cham WHERE LOWER(cham.area_ingresso) LIKE LOWER('%quimica%') AND LOWER(cham.sigla_campus) = LOWER('val') AND cham.ano = 2023 AND cham.semestre = 1

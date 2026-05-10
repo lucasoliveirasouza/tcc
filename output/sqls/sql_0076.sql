@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT srv.pk_siape) AS quantidade_servidores FROM servidor AS srv JOIN calc_hora_aula_media AS cha ON srv.pk_siape = cha.siape WHERE cha.semestre = 2 AND cha.ano = 2023 AND LOWER(srv.area_ingresso) LIKE LOWER('%ciencia e tecnologia de alimentos%') AND cha.sigla_campus = 'ITU'

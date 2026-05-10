@@ -1,0 +1,1 @@
+SELECT MAX(hora_aula_media_p) AS MAIOR_MEDIA_HORA_AULA_PADRONIZADA FROM calc_hora_aula_media AS CHAM JOIN servidor AS SERV ON CHAM.siape = SERV.pk_siape WHERE CHAM.sigla_campus = 'ANA' AND CHAM.area_ingresso = 'MATEMATICA'

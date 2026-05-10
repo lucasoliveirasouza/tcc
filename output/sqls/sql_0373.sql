@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM servidor s JOIN lattes_p_prodtec pp ON s.pk_siape = pp.fk_siape JOIN lattes_prodtec lp ON pp.fk_prodtec = lp.pk WHERE LOWER(s.genero) = LOWER('feminino') AND LOWER(lp.natureza) = LOWER('assessoria') AND LOWER(s.campus_atual) LIKE LOWER('%cidade de goias%') AND lp.ano = 2024

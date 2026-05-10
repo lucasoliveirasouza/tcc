@@ -1,0 +1,1 @@
+SELECT COUNT(lp.pk) FROM lattes_p_prodbib lp JOIN lattes_prodbib lb ON lp.fk_prodbib = lb.pk JOIN servidor s ON lp.fk_siape = s.pk_siape WHERE LOWER(s.genero) = LOWER('masculino') AND LOWER(s.sigla_campus) = LOWER('gyn') AND LOWER(s.area_ingresso) = LOWER('engenharia civil') AND lb.ano = '2023' AND LOWER(lb.tipo) = LOWER('artigo')

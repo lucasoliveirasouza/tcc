@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT lp.producao) AS qtd FROM lattes_prodbib lp INNER JOIN lattes_p_prodbib lpp ON lp.pk = lpp.fk_prodbib INNER JOIN servidor s ON lpp.fk_siape = s.pk_siape WHERE LOWER(lp.tipo) = LOWER('capitulo de livro') AND LOWER(s.sigla_campus) = LOWER('inh') AND LOWER(s.area_ingresso) = LOWER('biologia geral') AND LOWER(s.genero) = LOWER('feminino') AND lp.ano = '2023'

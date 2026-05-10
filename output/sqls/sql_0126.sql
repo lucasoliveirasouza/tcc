@@ -1,0 +1,1 @@
+SELECT AVG(c.hora_aula_media_p) AS media_hora_aula_padronizada FROM calc_hora_aula_media c WHERE LOWER(c.sigla_campus) = LOWER('oes') AND LOWER(c.area_ingresso) = LOWER('educacao') AND c.ano = 2022 AND c.semestre = 1

@@ -1,0 +1,1 @@
+SELECT AVG(chm.hora_aula_media_p) AS media_horas_aula_padronizada FROM calc_hora_aula_media chm WHERE LOWER(chm.area_ingresso) = LOWER('geociencias') AND chm.sigla_campus = 'JAT' AND chm.ano = 2023 AND chm.semestre = 2

@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM lattes_p_banca AS pb JOIN lattes_banca AS b ON pb.fk_banca = b.pk JOIN servidor AS s ON pb.fk_siape = s.pk_siape WHERE LOWER(b.natureza) = 'curso de aperfeicoamento/especializacao' AND LOWER(s.genero) = 'masculino' AND b.ano >= (CAST(strftime('%Y', 'now') AS INTEGER) - 5) AND LOWER(s.sigla_campus) = 'oes' AND LOWER(s.area_ingresso) LIKE '%geografia%'

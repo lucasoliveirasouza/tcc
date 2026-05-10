@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM lattes_p_evento AS pe JOIN lattes_evento AS e ON pe.fk_evento = e.pk JOIN servidor AS s ON pe.fk_siape = s.pk_siape WHERE LOWER(pe.tipo) = LOWER('apresentacao oral') AND LOWER(e.natureza) = LOWER('simposio') AND LOWER(s.genero) = LOWER('masculino') AND LOWER(s.sigla_campus) = LOWER('itu') AND LOWER(s.area_ingresso) = LOWER('libras') AND e.ano = 2021

@@ -1,0 +1,1 @@
+SELECT s.genero FROM estagio e JOIN servidor s ON s.pk_siape = e.fk_siape WHERE e.data_inicio >= (DATE('now', '-5 years')) AND LOWER(e.tipo) LIKE LOWER('%obrig%') AND LOWER(COALESCE(s.area_ingresso, '')) LIKE '%quim%' AND (LOWER(COALESCE(e.campus, '')) LIKE '%inhumas%' OR s.sigla_campus = 'INH') GROUP BY s.genero ORDER BY COUNT(*) DESC LIMIT 1

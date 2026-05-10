@@ -1,0 +1,1 @@
+SELECT AVG(CHM.hora_aula_media) AS media_hora_aula FROM calc_hora_aula_media AS CHM WHERE LOWER(CHM.area_ingresso) LIKE LOWER('%educacao fisica%') AND CHM.sigla_campus = 'LUZ' AND CHM.ano = 2023 AND CHM.semestre = 1 GROUP BY CHM.sigla_campus ORDER BY media_hora_aula DESC LIMIT 1

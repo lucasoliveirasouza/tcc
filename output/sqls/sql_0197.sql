@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT s.pk_siape) AS qtd_servidores FROM servidor s WHERE LOWER(s.area_ingresso) LIKE LOWER('%letras%') AND LOWER(s.sigla_campus) = LOWER('for') AND s.pk_siape IN (SELECT chm.siape FROM calc_hora_aula_media chm WHERE chm.ano = 2022 AND chm.semestre = 2 AND LOWER(chm.sigla_campus) = LOWER('for'))

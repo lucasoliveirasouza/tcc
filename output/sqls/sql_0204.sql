@@ -1,0 +1,1 @@
+SELECT s.contrato, COUNT(s.pk_siape) AS quantidade FROM servidor s JOIN calc_hora_aula_media c ON s.pk_siape = c.siape WHERE LOWER(s.area_ingresso) LIKE LOWER('%filosofia%') AND LOWER(c.sigla_campus) = LOWER('goi') AND c.ano = 2023 AND c.semestre = 2 AND LOWER(s.contrato) IN ('efetivos', 'temporarios') GROUP BY s.contrato ORDER BY s.contrato

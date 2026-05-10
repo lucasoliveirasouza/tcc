@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS total_publicacoes FROM lattes_p_tex_jor lpj JOIN lattes_tex_jor ltj ON lpj.fk_tex_jor = ltj.pk JOIN servidor s ON lpj.fk_siape = s.pk_siape WHERE LOWER(ltj.natureza_da_producao) = LOWER('jornal de noticias') AND LOWER(s.genero) = LOWER('feminino') AND LOWER(s.sigla_campus) = LOWER('gyn') AND LOWER(COALESCE(s.area_ingresso,'')) LIKE '%letras%' AND ltj.ano = 2024

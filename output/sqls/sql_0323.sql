@@ -1,0 +1,1 @@
+SELECT COUNT(sp.pk) AS QUANTIDADE FROM SERVIDOR_PROJ sp JOIN SERVIDOR s ON sp.fk_siape = s.pk_siape JOIN PROJ p ON sp.fk_proj = p.pk WHERE LOWER(s.genero) = LOWER('feminino') AND LOWER(COALESCE(s.sigla_campus,'')) = 'luz' AND LOWER(COALESCE(p.area_conhecimento,'')) LIKE '%biologia geral%' AND sp.data_entrada >= (DATE('now', '-5 years'))

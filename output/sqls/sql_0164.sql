@@ -1,0 +1,1 @@
+SELECT AVG(cham."hora_aula_media") AS media_hora_aula FROM calc_hora_aula_media cham WHERE LOWER(cham."area_ingresso") LIKE LOWER('%matematica%') AND LOWER(cham."sigla_campus") = LOWER('val') AND cham."ano" = 2024 AND cham."semestre" = 1

@@ -1,0 +1,1 @@
+SELECT AVG(c.hora_aula_media) AS MEDIA_HORA_AULA FROM calc_hora_aula_media c WHERE LOWER(c.area_ingresso) = LOWER('ciencia da computacao') AND c.ano = 2024 AND c.semestre = 1 AND LOWER(c.sigla_campus) = LOWER('itu')

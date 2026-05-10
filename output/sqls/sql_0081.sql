@@ -1,0 +1,1 @@
+SELECT AVG(cham.hora_aula_media_p) AS media_hora_aula_padronizada FROM calc_hora_aula_media cham WHERE LOWER(cham.nome_disciplina) LIKE LOWER('%filosofia%') AND LOWER(cham.sigla_campus) = LOWER('itu') AND cham.ano = 2021 AND cham.semestre = 1

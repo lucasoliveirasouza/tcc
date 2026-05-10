@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS qtd_servidores FROM servidor s WHERE LOWER(s.area_ingresso) = LOWER('artes') AND LOWER(s.sigla_campus) = LOWER('ana') AND s.saiu_do_ifg = FALSE AND EXISTS (SELECT 1 FROM calc_hora_aula_media c WHERE c.siape = s.pk_siape AND c.ano = 2023 AND c.semestre = 2 AND LOWER(c.sigla_campus) = LOWER('ana') AND LOWER(c.area_ingresso) = LOWER('artes'))

@@ -1,0 +1,1 @@
+SELECT chm.hora_aula_media_p FROM CALC_HORA_AULA_MEDIA AS chm WHERE LOWER(chm.area_ingresso) = LOWER('geografia') AND LOWER(chm.sigla_campus) = LOWER('gyn') AND chm.ano = 2023 AND chm.semestre = 1

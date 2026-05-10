@@ -1,0 +1,1 @@
+SELECT c.area_ingresso FROM calc_hora_aula_media c WHERE c.sigla_campus = 'ITU' AND c.hora_aula_media = 8.0 AND c.ano = 2024 AND c.semestre = 1

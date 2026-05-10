@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM servidor s WHERE LOWER(s.area_ingresso) = LOWER('ciencia da computacao') AND LOWER(s.sigla_campus) = LOWER('inh') AND s.pk_siape IN (SELECT chm.siape FROM calc_hora_aula_media chm WHERE chm.ano = 2020 AND chm.semestre = 1 AND LOWER(chm.sigla_campus) = LOWER('inh'))

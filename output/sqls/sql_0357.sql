@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS quantidade FROM lattes_p_prodbib pb JOIN lattes_prodbib b ON pb.fk_prodbib = b.pk JOIN servidor s ON pb.fk_siape = s.pk_siape WHERE LOWER(b.tipo) = LOWER('artigo') AND LOWER(b.natureza) = LOWER('completo') AND LOWER(s.campus_atual) LIKE LOWER('%anapolis%') AND LOWER(s.area_ingresso) LIKE LOWER('%geografia%') AND b.ano = '2020'

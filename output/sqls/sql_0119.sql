@@ -1,0 +1,1 @@
+SELECT AVG(c.hora_aula_media) AS media_hora_aula FROM calc_hora_aula_media c WHERE LOWER(c.area_ingresso) LIKE LOWER('%fisica geral%') AND LOWER(c.sigla_campus) = LOWER('luz') AND c.ano = 2020 AND c.semestre = 1

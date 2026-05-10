@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT s.pk_siape) AS qtd_servidores FROM servidor s JOIN calc_hora_aula_media c ON c.siape = s.pk_siape WHERE s.contrato = 'EFETIVOS' AND LOWER(s.area_ingresso) LIKE LOWER('%fisica geral%') AND c.ano = 2023 AND c.semestre = 1 AND LOWER(c.sigla_campus) = LOWER('lin') AND s.saiu_do_ifg = FALSE

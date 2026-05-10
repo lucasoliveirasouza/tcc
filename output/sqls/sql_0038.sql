@@ -1,0 +1,1 @@
+SELECT AVG(chm.hora_aula_media) AS MEDIA_HORA_AULA FROM calc_hora_aula_media chm WHERE LOWER(chm.nome_disciplina) LIKE LOWER('%biologia geral%') AND LOWER(chm.sigla_campus) = LOWER('goi') AND chm.ano = 2023 AND chm.semestre = 1

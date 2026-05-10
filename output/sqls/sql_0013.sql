@@ -1,0 +1,1 @@
+SELECT COUNT(s.pk_siape) AS qtd_servidores FROM servidor s WHERE LOWER(s.sigla_campus) = LOWER('ana') AND LOWER(s.area_ingresso) = LOWER('quimica') AND s.saiu_do_ifg = FALSE AND (s.data_ingresso_ifg IS NULL OR s.data_ingresso_ifg <= '2023-06-30')

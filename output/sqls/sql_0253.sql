@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT s.pk_siape) FROM servidor s JOIN calc_hora_aula_media c ON s.pk_siape = c.siape WHERE LOWER(s.contrato) = LOWER('efetivos') AND LOWER(s.area_ingresso) LIKE LOWER('%letras%') AND LOWER(s.sigla_campus) = LOWER('jat') AND c.ano = 2020 AND c.semestre = 1

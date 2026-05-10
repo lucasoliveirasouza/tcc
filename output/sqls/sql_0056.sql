@@ -1,0 +1,1 @@
+SELECT AVG(chm.hora_aula_media) AS MEDIA_HORA_AULA FROM calc_hora_aula_media chm WHERE LOWER(chm.sigla_campus) = LOWER('GYN') AND LOWER(chm.area_ingresso) = LOWER('LETRAS') AND chm.ano = 2024 AND chm.semestre = 1 GROUP BY chm.sigla_campus, chm.area_ingresso ORDER BY MEDIA_HORA_AULA LIMIT 1

@@ -1,0 +1,1 @@
+SELECT AVG(hora_aula_media) AS MEDIA_HORAS_AULA FROM CALC_HORA_AULA_MEDIA WHERE sigla_campus = 'JAT' AND area_ingresso = 'EDUCACAO' AND semestre = 1 AND ano = 2024

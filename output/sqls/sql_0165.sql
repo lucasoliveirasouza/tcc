@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT C.siape) AS QTDE_SERVIDORES FROM CALC_HORA_AULA_MEDIA C WHERE LOWER(C.area_ingresso) = LOWER('matematica') AND LOWER(C.sigla_campus) = LOWER('val') AND C.ano = 2021 AND C.semestre = 2

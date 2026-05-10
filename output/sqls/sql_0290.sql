@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS qtd_servidores FROM servidor s WHERE s.contrato = 'EFETIVOS' AND LOWER(s.area_ingresso) LIKE LOWER('%filosofia%') AND s.sigla_campus = 'URU' AND s.saiu_do_ifg = FALSE AND EXISTS (SELECT 1 FROM calc_hora_aula_media c WHERE c.siape = s.pk_siape AND c.ano = 2020 AND c.semestre = 2)

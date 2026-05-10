@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS quantidade FROM servidor s WHERE LOWER(s.area_ingresso) = LOWER('biologia geral') AND LOWER(s.sigla_campus) = LOWER('lin') AND s.pk_siape IN (SELECT c.siape FROM calc_hora_aula_media c WHERE c.ano = 2022 AND c.semestre = 2 AND LOWER(c.sigla_campus) = LOWER('lin')) AND s.saiu_do_ifg = FALSE

@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT s.pk_siape) FROM servidor s JOIN calc_hora_aula_media cham ON s.pk_siape = cham.siape WHERE LOWER(cham.area_ingresso) = LOWER('sociologia') AND LOWER(cham.sigla_campus) = LOWER('oes') AND cham.ano = 2023 AND cham.semestre = 1

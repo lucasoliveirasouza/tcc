@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS qtd_servidores FROM servidor s WHERE LOWER(s.area_ingresso) = LOWER('fisica geral') AND LOWER(s.sigla_campus) = LOWER('gyn') AND s.pk_siape IN (SELECT chm.siape FROM calc_hora_aula_media chm WHERE chm.ano = 2021 AND chm.semestre = 2 AND LOWER(chm.area_ingresso) = LOWER('fisica geral') AND LOWER(chm.sigla_campus) = LOWER('gyn')) AND s.saiu_do_ifg = FALSE

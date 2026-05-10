@@ -1,0 +1,1 @@
+SELECT AVG(chm.hora_aula_media_p) AS media_padronizada FROM calc_hora_aula_media AS chm WHERE LOWER(chm.area_ingresso) = LOWER('filosofia') AND LOWER(chm.sigla_campus) = LOWER('goi') AND chm.ano = 2023 AND chm.semestre = 1

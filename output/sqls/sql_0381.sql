@@ -1,0 +1,1 @@
+SELECT COUNT(lp.pk) AS qtd FROM lattes_p_prodbib lp JOIN servidor s ON lp.fk_siape = s.pk_siape JOIN lattes_prodbib lpb ON lp.fk_prodbib = lpb.pk WHERE LOWER(s.genero) = LOWER('masculino') AND LOWER(s.campus_atual) LIKE LOWER('%goiania%') AND LOWER(s.area_ingresso) LIKE LOWER('%filosofia%') AND LOWER(lpb.tipo) = LOWER('resumo de trabalhos') AND lpb.ano = '2023'

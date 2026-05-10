@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT cha.siape) FROM calc_hora_aula_media cha WHERE LOWER(cha.sigla_campus) = LOWER('jat') AND LOWER(cha.area_ingresso) LIKE LOWER('%fisica geral%') AND cha.ano = 2024 AND cha.semestre = 1

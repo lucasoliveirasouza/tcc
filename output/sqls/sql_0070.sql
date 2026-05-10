@@ -1,0 +1,1 @@
+SELECT AVG(cham.hora_aula_media_p) AS media_horas_aula_padronizada FROM calc_hora_aula_media cham WHERE LOWER(cham.area_ingresso) = LOWER('letras') AND LOWER(cham.sigla_campus) = LOWER('inh') AND cham.ano = 2021 AND cham.semestre = 1

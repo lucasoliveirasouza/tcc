@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS quantidade FROM SERVIDOR s WHERE LOWER(s.area_ingresso) = LOWER('matematica') AND LOWER(s.sigla_campus) = LOWER('apa') AND LOWER(s.contrato) = LOWER('efetivos') AND s.saiu_do_ifg = FALSE AND EXISTS (SELECT 1 FROM CALC_HORA_AULA_MEDIA c WHERE c.siape = s.pk_siape AND c.ano = 2021 AND c.semestre = 2 AND LOWER(c.sigla_campus) = LOWER('apa'))

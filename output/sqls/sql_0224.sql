@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT s.pk_siape) AS total_servidores FROM servidor s JOIN calc_hora_aula_media ch ON s.pk_siape = ch.siape WHERE LOWER(s.contrato) = LOWER('efetivos') AND LOWER(s.sigla_campus) = LOWER('inh') AND LOWER(ch.area_ingresso) = LOWER('ciencia e tecnologia de alimentos') AND ch.ano = 2024 AND ch.semestre = 1

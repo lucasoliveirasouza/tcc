@@ -1,0 +1,1 @@
+SELECT CHAM.semestre FROM calc_hora_aula_media CHAM JOIN servidor S ON CHAM.siape = S.pk_siape WHERE CHAM.ano = 2024 AND LOWER(CHAM.sigla_campus) = LOWER('ana') AND LOWER(S.area_ingresso) = LOWER('artes') AND LOWER(S.contrato) = LOWER('efetivos') GROUP BY CHAM.semestre HAVING COUNT(DISTINCT S.pk_siape) = 3 ORDER BY CHAM.semestre LIMIT 1

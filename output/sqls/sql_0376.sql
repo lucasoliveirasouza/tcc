@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT lp.pk) AS quantidade FROM servidor s JOIN lattes_p_prodbib lppb ON lppb.fk_siape = s.pk_siape JOIN lattes_prodbib lp ON lp.pk = lppb.fk_prodbib WHERE LOWER(lp.tipo) = LOWER('trabalho em evento') AND LOWER(lp.natureza) = LOWER('completo') AND s.genero = 'MASCULINO' AND s.sigla_campus = 'GYN' AND LOWER(s.area_ingresso) LIKE LOWER('%artes%') AND lp.ano = '2022'

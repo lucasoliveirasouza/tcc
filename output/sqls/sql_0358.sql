@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS qtd_resumo_expandido FROM lattes_prodbib pb JOIN lattes_p_prodbib ppb ON pb.pk = ppb.fk_prodbib JOIN servidor s ON ppb.fk_siape = s.pk_siape WHERE LOWER(pb.natureza) = LOWER('resumo expandido') AND LOWER(s.sigla_campus) = LOWER('ana') AND LOWER(s.area_ingresso) = LOWER('geografia') AND pb.ano = '2021'

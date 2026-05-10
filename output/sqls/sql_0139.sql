@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT S.pk_siape) AS total_servidores FROM servidor S JOIN calc_hora_aula_media C ON S.pk_siape = C.siape WHERE LOWER(C.area_ingresso) LIKE LOWER('%ciencia da computacao%') AND C.sigla_campus = 'SEN' AND C.ano = 2023 AND C.semestre = 2

@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS quantidade FROM lattes_p_evento lpe JOIN lattes_evento le ON lpe.fk_evento = le.pk JOIN servidor s ON lpe.fk_siape = s.pk_siape WHERE LOWER(lpe.tipo) = LOWER('apresentacao oral') AND LOWER(s.sigla_campus) = LOWER('apa') AND LOWER(s.area_ingresso) = LOWER('sociologia') AND le.ano = 2020

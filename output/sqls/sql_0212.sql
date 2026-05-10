@@ -1,0 +1,1 @@
+SELECT ano FROM calc_hora_aula_media AS ch INNER JOIN servidor AS s ON ch.siape = s.pk_siape WHERE LOWER(ch.sigla_campus) = LOWER('gyn') AND LOWER(s.area_ingresso) = LOWER('engenharia civil') AND s.categoria = 'DOCENTE' AND LOWER(s.contrato) = LOWER('efetivos') GROUP BY ano HAVING COUNT(DISTINCT s.pk_siape) = 17

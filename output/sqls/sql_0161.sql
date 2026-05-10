@@ -1,0 +1,1 @@
+SELECT CHA.hora_aula_media_p FROM calc_hora_aula_media CHA WHERE LOWER(CHA.sigla_campus) = LOWER('val') AND LOWER(CHA.nome_disciplina) LIKE LOWER('%fisica geral%') AND CHA.semestre = 2 AND CHA.ano = 2023 LIMIT 1

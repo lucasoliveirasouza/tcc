@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS numero_servidores FROM servidor s WHERE LOWER(s.contrato) = LOWER('efetivos') AND LOWER(s.area_ingresso) = LOWER('biologia geral') AND LOWER(s.sigla_campus) = LOWER('ana') AND s.data_ingresso_ifg <= '2020-12-31' AND (s.saiu_do_ifg = FALSE OR s.saiu_do_ifg IS NULL OR s.data_criacao > '2020-12-31')

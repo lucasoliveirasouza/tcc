@@ -1,0 +1,1 @@
+SELECT COUNT(s.pk_siape) FROM servidor s WHERE s.categoria = 'DOCENTE' AND s.contrato = 'EFETIVOS' AND LOWER(s.sigla_campus) = LOWER('itu') AND LOWER(s.area_ingresso) LIKE LOWER('%engenharia quimica%') AND s.saiu_do_ifg = FALSE AND CAST(strftime('%Y', s.data_ingresso_ifg) AS INTEGER) <= 2024 AND CAST(strftime('%m', s.data_ingresso_ifg) AS REAL) <= 6
