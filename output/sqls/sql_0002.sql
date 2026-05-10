@@ -1,1 +1,0 @@
-SELECT AVG(ch.hora_aula_media_p) AS MEDIA_PADRONIZADA_HORA_AULA FROM CALC_HORA_AULA_MEDIA ch WHERE LOWER(ch.area_ingresso) = LOWER('educacao fisica') AND LOWER(ch.sigla_campus) = LOWER('ana') AND ch.ano = 2020 AND ch.semestre = 1

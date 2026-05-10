@@ -1,1 +1,0 @@
-SELECT COUNT(s.pk_siape) AS quantidade FROM servidor s WHERE LOWER(s.categoria) = LOWER('docente') AND LOWER(s.contrato) = LOWER('efetivos') AND LOWER(s.area_ingresso) = LOWER('sociologia') AND LOWER(s.sigla_campus) = LOWER('goi') AND s.saiu_do_ifg = FALSE AND s.data_ingresso_ifg <= '2020-12-31'

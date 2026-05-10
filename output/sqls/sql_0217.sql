@@ -1,1 +1,0 @@
-SELECT chm.semestre FROM calc_hora_aula_media chm JOIN servidor s ON chm.siape = s.pk_siape WHERE chm.ano = 2024 AND LOWER(chm.sigla_campus) = LOWER('gyn') AND LOWER(s.area_ingresso) = LOWER('engenharia civil') AND LOWER(s.contrato) = LOWER('efetivos') GROUP BY chm.semestre HAVING COUNT(DISTINCT chm.siape) = 1

@@ -1,1 +1,0 @@
-SELECT MIN(hora_aula_media_p) AS MENOR_MEDIA_HORAS_AULA_PADRONIZADA FROM calc_hora_aula_media WHERE area_ingresso = 'FILOSOFIA' AND sigla_campus = 'ITU'

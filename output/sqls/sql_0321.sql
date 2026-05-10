@@ -1,1 +1,0 @@
-SELECT DISTINCT s.area_ingresso_og FROM servidor AS s JOIN servidor_proj AS sp ON s.pk_siape = sp.fk_siape JOIN proj AS p ON sp.fk_proj = p.pk WHERE LOWER(sigla_campus) = LOWER('lin') AND LOWER(s.genero) = LOWER('feminino') AND LOWER(sp.papel) = LOWER('coordenador') AND LOWER(p.tipo_projeto) = LOWER('extensao') AND p.data_termino >= date('now', '-5 years')

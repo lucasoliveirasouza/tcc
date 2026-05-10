@@ -1,1 +1,0 @@
-SELECT AVG(ch.hora_aula_media) AS media_hora_aula FROM calc_hora_aula_media ch WHERE LOWER(ch.area_ingresso) LIKE LOWER('%saude coletiva%') AND LOWER(ch.sigla_campus) = LOWER('lin') AND ch.ano = 2021 AND ch.semestre = 2

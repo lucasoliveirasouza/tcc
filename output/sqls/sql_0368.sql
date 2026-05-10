@@ -1,1 +1,0 @@
-SELECT COUNT(lp.pk) AS quantidade_producoes FROM lattes_prodbib lp INNER JOIN lattes_p_prodbib lpp ON lp.pk = lpp.fk_prodbib INNER JOIN servidor s ON lpp.fk_siape = s.pk_siape WHERE LOWER(lp.natureza) = LOWER('resumo') AND LOWER(s.sigla_campus) = LOWER('for') AND LOWER(s.area_ingresso) LIKE LOWER('%letras%') AND LOWER(s.genero) = LOWER('masculino') AND lp.ano = '2021'

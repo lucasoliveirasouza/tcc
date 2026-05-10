@@ -1,1 +1,0 @@
-SELECT MIN(c.ham) AS MENOR_HORA_AULA_MEDIA FROM (SELECT chm.hora_aula_media AS ham FROM calc_hora_aula_media chm WHERE LOWER(chm.sigla_campus) = LOWER('inh') AND LOWER(chm.area_ingresso) = LOWER('fisica geral')) c

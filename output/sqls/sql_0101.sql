@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM servidor s WHERE LOWER(s.sigla_campus) = LOWER('LIN') AND LOWER(s.area_ingresso) = LOWER('Biologia Geral') AND s.data_ingresso_ifg <= '2024-06-30'

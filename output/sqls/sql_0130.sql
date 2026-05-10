@@ -1,1 +1,0 @@
-SELECT SUM(c.hora_aula) AS volume_horas_aula FROM calc_hora_aula_media c WHERE LOWER(c.sigla_campus) = LOWER('oes') AND LOWER(c.area_ingresso) = LOWER('fisica geral') AND c.ano = 2020 AND c.semestre = 2

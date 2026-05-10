@@ -1,1 +1,0 @@
-SELECT COUNT(*) AS quantidade_producoes FROM lattes_p_prodtec lpp JOIN lattes_prodtec lp ON lpp.fk_prodtec = lp.pk JOIN servidor s ON lpp.fk_siape = s.pk_siape WHERE LOWER(lp.natureza) = LOWER('parecer') AND LOWER(s.sigla_campus) = LOWER('goi') AND lp.ano = 2020 AND LOWER(s.area_ingresso) = LOWER('agronomia') AND LOWER(s.genero) = LOWER('masculino')

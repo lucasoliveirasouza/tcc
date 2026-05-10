@@ -1,1 +1,0 @@
-SELECT AVG(ch.hora_aula_media) AS media_hora_aula FROM calc_hora_aula_media ch JOIN servidor s ON ch.siape = s.pk_siape WHERE LOWER(ch.area_ingresso) LIKE LOWER('%geografia%') AND LOWER(ch.sigla_campus) = LOWER('uru') AND ch.ano = 2020 AND ch.semestre = 2

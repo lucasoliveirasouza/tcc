@@ -1,1 +1,0 @@
-SELECT ano FROM calc_hora_aula_media WHERE sigla_campus = 'ANA' AND LOWER(area_ingresso) = LOWER('engenharia de transportes') GROUP BY ano ORDER BY AVG(hora_aula_media) DESC LIMIT 1

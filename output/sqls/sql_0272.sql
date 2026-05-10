@@ -1,1 +1,0 @@
-SELECT COUNT(*) AS qtd_servidores FROM servidor s WHERE LOWER(s.categoria) = LOWER('docente') AND LOWER(s.contrato) = LOWER('efetivos') AND LOWER(s.area_ingresso) LIKE LOWER('%letras%') AND LOWER(s.sigla_campus) = LOWER('luz') AND s.saiu_do_ifg = FALSE AND s.data_ingresso_ifg <= '2021-12-31'

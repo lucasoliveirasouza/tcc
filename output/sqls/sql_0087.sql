@@ -1,1 +1,0 @@
-SELECT MAX(cham.hora_aula_media) AS maior_hora_aula_media FROM calc_hora_aula_media cham WHERE LOWER(cham.area_ingresso) LIKE LOWER('%psicologia%') AND LOWER(cham.sigla_campus) = LOWER('itu')

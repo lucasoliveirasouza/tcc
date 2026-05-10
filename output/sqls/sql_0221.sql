@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT s.pk_siape) FROM servidor s INNER JOIN calc_hora_aula_media c ON s.pk_siape = c.siape WHERE LOWER(s.contrato) = LOWER('efetivos') AND LOWER(c.area_ingresso) LIKE LOWER('%turismo%') AND c.sigla_campus = 'GYN' AND c.ano = 2023 AND c.semestre = 2

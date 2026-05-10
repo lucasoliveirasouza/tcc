@@ -1,1 +1,0 @@
-SELECT AVG(c.ham) AS media_hora_aula FROM (SELECT ch.hora_aula_media AS ham FROM calc_hora_aula_media ch WHERE LOWER(ch.sigla_campus) = LOWER('ana') AND LOWER(ch.area_ingresso) = LOWER('letras') AND ch.ano = 2024 AND ch.semestre = 2) c

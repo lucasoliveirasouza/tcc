@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM servidor WHERE contrato = 'EFETIVOS' AND LOWER(area_ingresso) = LOWER('engenharia civil') AND sigla_campus = 'JAT' AND pk_siape IN (SELECT siape FROM calc_hora_aula_media WHERE ano = 2022 AND semestre = 2)

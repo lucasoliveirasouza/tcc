@@ -1,1 +1,0 @@
-SELECT COUNT(s.pk_siape) AS quantidade_servidores FROM servidor s WHERE LOWER(s.sigla_campus) = LOWER('itu') AND LOWER(s.area_ingresso) = LOWER('sociologia') AND s.data_ingresso_ifg <= '2020-06-30' AND (s.saiu_do_ifg = FALSE OR s.data_ingresso_ifg IS NOT NULL)

@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT s.pk_siape) FROM servidor s JOIN calc_hora_aula_media ch ON s.pk_siape = ch.siape WHERE LOWER(ch.area_ingresso) = LOWER('ciencia da computacao') AND LOWER(s.sigla_campus) = LOWER('jat') AND s.contrato = 'EFETIVOS' AND ch.ano = 2020 AND ch.semestre = 2

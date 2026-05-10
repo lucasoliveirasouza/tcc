@@ -1,1 +1,0 @@
-SELECT COUNT(*) AS qtd_servidores FROM SERVIDOR s WHERE LOWER(s.contrato) = LOWER('efetivos') AND LOWER(s.area_ingresso) = LOWER('sociologia') AND LOWER(s.sigla_campus) = LOWER('apa') AND s.data_ingresso_ifg <= '2022-06-30' AND (s.saiu_do_ifg = FALSE OR s.saiu_do_ifg IS NULL OR s.data_ingresso_ifg >= '2022-01-01')

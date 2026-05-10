@@ -1,1 +1,0 @@
-SELECT AVG(hora_aula_media_p) AS MEDIA_PADRONIZADA_HORAS_AULA FROM calc_hora_aula_media WHERE area_ingresso = 'MATEMATICA' AND sigla_campus = 'LUZ' AND semestre = 1 AND ano = 2022

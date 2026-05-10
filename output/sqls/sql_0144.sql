@@ -1,1 +1,0 @@
-SELECT AVG(CAST(hora_aula_media AS FLOAT8)) AS media_horas_aula FROM calc_hora_aula_media AS ch WHERE ch.sigla_campus = 'SEN' AND LOWER(ch.area_ingresso) LIKE LOWER('%matematica%') AND ch.ano = 2023 AND ch.semestre = 2

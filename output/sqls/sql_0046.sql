@@ -1,1 +1,0 @@
-SELECT AVG(c.hora_aula_media) AS MEDIA_HORA_AULA FROM calc_hora_aula_media c WHERE LOWER(c.sigla_campus) = LOWER('gyn') AND LOWER(c.area_ingresso) = LOWER('engenharia de minas') AND c.ano = 2020 AND c.semestre = 1

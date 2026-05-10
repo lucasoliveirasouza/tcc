@@ -1,1 +1,0 @@
-SELECT COUNT(s.pk_siape) AS qtd_servidores_efetivos_geografia_goiania_oeste_2021_2 FROM servidor s WHERE LOWER(s.area_ingresso) LIKE LOWER('%geografia%') AND LOWER(s.sigla_campus) = LOWER('oes') AND LOWER(s.contrato) = LOWER('efetivos') AND s.saiu_do_ifg = FALSE AND s.data_ingresso_ifg <= '2021-12-31' AND (s.tempo_efetivo IS NULL OR s.tempo_efetivo >= 0) LIMIT 1

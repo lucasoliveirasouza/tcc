@@ -1,1 +1,0 @@
-SELECT AVG(c.hora_aula_media_p) AS media_hora_aula_padronizada FROM calc_hora_aula_media c WHERE LOWER(c.area_ingresso) = LOWER('biologia geral') AND c.sigla_campus = 'SEN' AND c.ano = 2023 AND c.semestre = 1

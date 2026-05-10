@@ -1,1 +1,0 @@
-SELECT COUNT(sp.pk) AS quantidade FROM servidor_proj sp JOIN proj p ON sp.fk_proj = p.pk JOIN servidor s ON sp.fk_siape = s.pk_siape WHERE LOWER(s.genero) = LOWER('feminino') AND LOWER(p.tipo_projeto) = LOWER('extensao') AND LOWER(COALESCE(p.area_conhecimento,'')) LIKE '%historia%' AND LOWER(COALESCE(s.sigla_campus,'')) = 'for' AND p.data_inicio >= (DATE('now', '-5 years'))

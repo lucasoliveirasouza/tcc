@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT c.siape) FROM calc_hora_aula_media c WHERE LOWER(c.sigla_campus) = LOWER('uru') AND LOWER(c.area_ingresso) LIKE LOWER('%sociologia%') AND c.ano = 2021 AND c.semestre = 1

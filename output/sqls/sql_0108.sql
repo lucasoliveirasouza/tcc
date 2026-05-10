@@ -1,1 +1,0 @@
-SELECT AVG(c.hora_aula_media) AS media_hora_aula FROM calc_hora_aula_media c WHERE c.sigla_campus = 'LIN' AND LOWER(c.area_ingresso) = LOWER('geociencias') AND c.ano = 2023 AND c.semestre = 1

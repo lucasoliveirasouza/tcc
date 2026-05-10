@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT c.siape) AS qtd_servidores FROM calc_hora_aula_media c WHERE LOWER(c.sigla_campus) = LOWER('gyn') AND LOWER(c.area_ingresso) = LOWER('matematica') AND c.ano = 2023 AND c.semestre = 2

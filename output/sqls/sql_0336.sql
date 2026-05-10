@@ -1,1 +1,0 @@
-SELECT COUNT(*) AS quantidade_participacoes FROM lattes_orientacao o JOIN servidor s ON o.fk_siape = s.pk_siape WHERE LOWER(o.tipo) LIKE '%iniciacao cientifica%' AND s.genero = 'MASCULINO' AND LOWER(s.campus_atual) LIKE '%cidade de goias%' AND LOWER(s.area_ingresso) LIKE '%zootecnia%' AND o.ano >= (CAST(strftime('%Y', 'now') AS INTEGER) - 5)

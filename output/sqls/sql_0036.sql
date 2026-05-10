@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT s.pk_siape) FROM servidor s JOIN calc_hora_aula_media c ON s.pk_siape = c.siape WHERE LOWER(s.area_ingresso) = LOWER('quimica') AND LOWER(s.sigla_campus) = LOWER('for') AND c.ano = 2023 AND c.semestre = 2 AND NOT s.saiu_do_ifg

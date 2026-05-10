@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT s.pk_siape) AS quantidade_efetivos FROM servidor s JOIN calc_hora_aula_media c ON s.pk_siape = c.siape WHERE LOWER(s.contrato) = LOWER('efetivos') AND LOWER(c.sigla_campus) = LOWER('apa') AND LOWER(c.area_ingresso) LIKE LOWER('%engenharia civil%') AND c.ano = 2021 AND c.semestre = 1

@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT ch.siape) AS quantidade_servidores FROM calc_hora_aula_media ch JOIN servidor s ON ch.siape = s.pk_siape WHERE LOWER(ch.sigla_campus) = LOWER('gyn') AND LOWER(ch.area_ingresso) LIKE LOWER('%engenharia agricola%') AND ch.ano = 2021 AND ch.semestre = 2

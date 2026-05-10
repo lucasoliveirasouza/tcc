@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT c.siape) AS quantidade_servidores FROM calc_hora_aula_media c WHERE LOWER(c.area_ingresso) LIKE LOWER('%biologia geral%') AND LOWER(c.sigla_campus) = LOWER('apa') AND c.ano = 2020 AND c.semestre = 2

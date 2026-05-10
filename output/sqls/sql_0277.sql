@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM servidor s JOIN calc_hora_aula_media c ON s.pk_siape = c.siape WHERE LOWER(s.contrato) = LOWER('efetivos') AND LOWER(s.area_ingresso) = LOWER('psicologia') AND LOWER(s.sigla_campus) = LOWER('oes') AND c.ano = 2021 AND c.semestre = 2

@@ -1,1 +1,0 @@
-SELECT COUNT(*) AS quantidade FROM lattes_prodbib pb JOIN lattes_p_prodbib ppb ON ppb.fk_prodbib = pb.pk JOIN servidor s ON s.pk_siape = ppb.fk_siape WHERE LOWER(pb.tipo) = LOWER('trabalho em evento') AND LOWER(pb.natureza) = LOWER('completo') AND s.genero = 'FEMININO' AND s.sigla_campus = 'ANA' AND LOWER(s.area_ingresso) = LOWER('educacao') AND pb.ano = '2023'

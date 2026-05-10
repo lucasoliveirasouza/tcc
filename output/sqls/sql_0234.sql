@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT s.pk_siape) AS qtd_servidores FROM servidor s JOIN calc_hora_aula_media c ON c.siape = s.pk_siape WHERE LOWER(s.campus_atual) LIKE LOWER('%itumbiara%') AND LOWER(c.area_ingresso) LIKE LOWER('%filosofia%') AND c.ano = 2024 AND c.semestre = 1 AND LOWER(s.contrato) LIKE LOWER('%efetivos%') AND s.saiu_do_ifg = FALSE

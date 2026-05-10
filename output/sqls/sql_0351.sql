@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM lattes_p_banca pb JOIN lattes_banca b ON pb.fk_banca = b.pk JOIN servidor s ON pb.fk_siape = s.pk_siape WHERE LOWER(b.natureza) LIKE LOWER('%gradua%') AND LOWER(s.area_ingresso) LIKE LOWER('%matem%') AND LOWER(s.sigla_campus) = LOWER('val') AND s.genero = 'MASCULINO' AND b.ano >= (CAST(strftime('%Y', 'now') AS INTEGER) - 5)

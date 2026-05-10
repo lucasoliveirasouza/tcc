@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT s.pk_siape) AS quantidade_servidores FROM servidor s JOIN calc_hora_aula_media cham ON s.pk_siape = cham.siape WHERE LOWER(s.area_ingresso) = LOWER('letras') AND s.contrato = 'EFETIVOS' AND cham.sigla_campus = 'INH' AND cham.ano = 2021 AND cham.semestre = 1

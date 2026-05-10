@@ -1,1 +1,0 @@
-SELECT COUNT(s.pk_siape) AS total_servidores FROM servidor s WHERE LOWER(s.contrato) = LOWER('efetivos') AND LOWER(s.area_ingresso) = LOWER('engenharia de minas') AND LOWER(s.sigla_campus) = LOWER('gyn') AND s.data_ingresso_ifg <= '2023-12-31' AND (s.saiu_do_ifg = FALSE OR s.saiu_do_ifg IS NULL)

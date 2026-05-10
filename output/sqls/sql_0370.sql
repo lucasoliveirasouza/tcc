@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM lattes_p_evento AS lpe JOIN lattes_evento AS le ON lpe.fk_evento = le.pk JOIN servidor AS s ON lpe.fk_siape = s.pk_siape WHERE LOWER(lpe.tipo) = LOWER('apresentacao oral') AND LOWER(s.campus_atual) LIKE LOWER('%cidade de goias%') AND LOWER(s.area_ingresso) LIKE LOWER('%artes%') AND le.ano = 2021

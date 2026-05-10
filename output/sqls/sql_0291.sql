@@ -1,1 +1,0 @@
-SELECT COUNT(DISTINCT s.pk_siape) AS total_servidores FROM servidor s WHERE LOWER(s.area_ingresso) = LOWER('economia') AND LOWER(s.sigla_campus) = LOWER('uru') AND s.saiu_do_ifg = FALSE AND s.data_ingresso_ifg <= '2021-06-30' AND (s.data_ingresso_ifg IS NULL OR s.data_ingresso_ifg <= '2021-06-30')
