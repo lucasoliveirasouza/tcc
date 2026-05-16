@@ -162,7 +162,7 @@ def format_report(sql: str) -> str:
 
 # ── Processamento em lote ──────────────────────────────────────────────────
 
-def process_folder(folder: Path, output_csv: Path) -> None:
+def process_folder(folder: Path, output_csv: Path, graf_dir: Path) -> None:
     """Classifica todos os .sql da pasta e grava o resultado em CSV."""
     sql_files = sorted(folder.glob('*.sql'))
     if not sql_files:
@@ -176,13 +176,14 @@ def process_folder(folder: Path, output_csv: Path) -> None:
         rows.append({'arquivo': path.name, 'classificacao': category})
         print(f"  {path.name:<30} → {category}")
 
+    output_csv.parent.mkdir(parents=True, exist_ok=True)
     with output_csv.open('w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=['arquivo', 'classificacao'])
         writer.writeheader()
         writer.writerows(rows)
 
     print(f"\nCSV gerado: {output_csv}  ({len(rows)} arquivo(s) processado(s))")
-    gerar_graficos(rows, output_csv.parent)
+    gerar_graficos(rows, graf_dir)
 
 
 # ── Gráficos ───────────────────────────────────────────────────────────────
@@ -191,16 +192,15 @@ CATEGORIAS = ['Basic', 'Advanced', 'Ultra', 'Expert']
 CORES = ['#4CAF50', '#2196F3', '#FF9800', '#F44336']
 
 
-def gerar_graficos(rows: list, base_dir: Path) -> None:
+def gerar_graficos(rows: list, graf_dir: Path) -> None:
     """Gera gráfico de pizza e tabela de contagem por complexidade."""
-    graficos_dir = base_dir / 'graficos'
-    graficos_dir.mkdir(exist_ok=True)
+    graf_dir.mkdir(parents=True, exist_ok=True)
 
     counts = {cat: sum(1 for r in rows if r['classificacao'] == cat) for cat in CATEGORIAS}
     total = sum(counts.values())
 
-    _gerar_pizza(counts, graficos_dir)
-    _gerar_tabela(counts, total, graficos_dir)
+    _gerar_pizza(counts, graf_dir)
+    _gerar_tabela(counts, total, graf_dir)
 
 
 def _gerar_pizza(counts: dict, graficos_dir: Path) -> None:

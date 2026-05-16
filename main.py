@@ -5,47 +5,74 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent / 'src'))
 
 from extractor import extract          # type: ignore
-from classifier import process_folder, format_report  # type: ignore
+from classifier import process_folder  # type: ignore
 
-ROOT      = Path(__file__).parent
-DATA_FILE = ROOT / 'data'   / 'dev_sintetica.json'
-SQLS_DIR  = ROOT / 'output' / 'sqls'
-RESULTS   = ROOT / 'output' / 'resultados.csv'
+ROOT = Path(__file__).parent
+
+DATASETS = {
+    '1': {
+        'nome':       'Dataset Jamily',
+        'data_dir':   ROOT / 'data'       / 'dataset_jamily',
+        'sqls_dir':   ROOT / 'output'     / 'dataset_jamily'         / 'sqls',
+        'graf_dir':   ROOT / 'output'     / 'dataset_jamily'         / 'graficos',
+        'resultado':  ROOT / 'resultados' / 'resultado_jamily.csv',
+        'prefix_fn':  None,
+    },
+    '2': {
+        'nome':       'Dataset Science Benchmark',
+        'data_dir':   ROOT / 'data'       / 'dataset_sciencebenchmark',
+        'sqls_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark' / 'sqls',
+        'graf_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark' / 'graficos',
+        'resultado':  ROOT / 'resultados' / 'resultado_sciencebenchmark.csv',
+        'prefix_fn':  lambda stem: stem.removeprefix('synth_'),
+    },
+    '3': {
+        'nome':       'Dataset Science Benchmark Manual',
+        'data_dir':   ROOT / 'data'       / 'dataset_sciencebenchmark_manual',
+        'sqls_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark_manual' / 'sqls',
+        'graf_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark_manual' / 'graficos',
+        'resultado':  ROOT / 'resultados' / 'resultado_sciencebenchmark_manual.csv',
+        'prefix_fn':  lambda stem: stem.removeprefix('dev_'),
+    },
+}
 
 MENU = """
-╔══════════════════════════════════════╗
-║   SQL Complexity Analysis Pipeline  ║
-╠══════════════════════════════════════╣
-║  1. Extrair SQLs do JSON             ║
-║  2. Medir complexidade dos SQLs      ║
-║  3. Executar tudo (extração + análise)║
-║  0. Sair                             ║
-╚══════════════════════════════════════╝
+╔══════════════════════════════════════════════════╗
+║      SQL Complexity Analysis Pipeline           ║
+╠══════════════════════════════════════════════════╣
+║  1. Dataset Jamily                               ║
+║  2. Dataset Science Benchmark                    ║
+║  3. Dataset Science Benchmark Manual             ║
+║  0. Sair                                         ║
+╚══════════════════════════════════════════════════╝
 """
+
+
+def run_dataset(cfg: dict) -> None:
+    json_files = sorted(cfg['data_dir'].glob('*.json'))
+    if not json_files:
+        print(f"Nenhum arquivo JSON encontrado em '{cfg['data_dir']}'.")
+        sys.exit(1)
+
+    print(f"\n=== Etapa 1: Extração ({cfg['nome']}) ===")
+    for json_file in json_files:
+        prefix = cfg['prefix_fn'](json_file.stem) if cfg['prefix_fn'] else None
+        extract(json_file, cfg['sqls_dir'], prefix=prefix)
+
+    print(f"\n=== Etapa 2: Classificação de Complexidade ===")
+    cfg['resultado'].parent.mkdir(parents=True, exist_ok=True)
+    process_folder(cfg['sqls_dir'], cfg['resultado'], cfg['graf_dir'])
 
 
 def main():
     print(MENU)
     opcao = input("Escolha uma opção: ").strip()
 
-    if opcao == '1':
-        print("\n=== Extração ===")
-        extract(DATA_FILE, SQLS_DIR)
-
-    elif opcao == '2':
-        print("\n=== Classificação de Complexidade ===")
-        process_folder(SQLS_DIR, RESULTS)
-
-    elif opcao == '3':
-        print("\n=== Etapa 1: Extração ===")
-        extract(DATA_FILE, SQLS_DIR)
-        print("\n=== Etapa 2: Classificação de Complexidade ===")
-        process_folder(SQLS_DIR, RESULTS)
-
+    if opcao in DATASETS:
+        run_dataset(DATASETS[opcao])
     elif opcao == '0':
         print("Saindo.")
         sys.exit(0)
-
     else:
         print(f"Opção '{opcao}' inválida.")
         sys.exit(1)

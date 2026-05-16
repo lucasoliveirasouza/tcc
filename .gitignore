@@ -9,3 +9,5 @@ build/
 .env
 .venv
 venv/
+.DS_Store
+output/*/sqls/
