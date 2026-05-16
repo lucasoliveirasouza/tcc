@@ -40,7 +40,7 @@ MENU = """
 ╔══════════════════════════════════════════════════╗
 ║      SQL Complexity Analysis Pipeline           ║
 ╠══════════════════════════════════════════════════╣
-║  1. Dataset Jamily                               ║
+║  1. Dataset Jamily.                              ║
 ║  2. Dataset Science Benchmark                    ║
 ║  3. Dataset Science Benchmark Manual             ║
 ║  0. Sair                                         ║
