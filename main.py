@@ -11,40 +11,53 @@ ROOT = Path(__file__).parent
 
 DATASETS = {
     '1': {
-        'nome':       'Dataset Jamily',
+        'nome':       'Dataset Jamily Sintético',
         'data_dir':   ROOT / 'data'       / 'dataset_jamily',
-        'sqls_dir':   ROOT / 'output'     / 'dataset_jamily'         / 'sqls',
-        'graf_dir':   ROOT / 'output'     / 'dataset_jamily'         / 'graficos',
+        'sqls_dir':   ROOT / 'output'     / 'dataset_jamily'              / 'sqls',
+        'graf_dir':   ROOT / 'output'     / 'dataset_jamily'              / 'graficos',
         'resultado':  ROOT / 'resultados' / 'resultado_jamily.csv',
         'prefix_fn':  None,
+        'query_key':  'query',
     },
     '2': {
-        'nome':       'Dataset Science Benchmark',
-        'data_dir':   ROOT / 'data'       / 'dataset_sciencebenchmark',
-        'sqls_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark' / 'sqls',
-        'graf_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark' / 'graficos',
-        'resultado':  ROOT / 'resultados' / 'resultado_sciencebenchmark.csv',
-        'prefix_fn':  lambda stem: stem.removeprefix('synth_'),
+        'nome':       'Dataset Jamily Manual',
+        'data_dir':   ROOT / 'data'       / 'dataset_jamily_manual',
+        'sqls_dir':   ROOT / 'output'     / 'dataset_jamily_manual'       / 'sqls',
+        'graf_dir':   ROOT / 'output'     / 'dataset_jamily_manual'       / 'graficos',
+        'resultado':  ROOT / 'resultados' / 'resultado_jamily_manual.csv',
+        'prefix_fn':  lambda stem: stem,
+        'query_key':  'SQL',
     },
     '3': {
+        'nome':       'Dataset Science Benchmark Sintético',
+        'data_dir':   ROOT / 'data'       / 'dataset_sciencebenchmark',
+        'sqls_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark'    / 'sqls',
+        'graf_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark'    / 'graficos',
+        'resultado':  ROOT / 'resultados' / 'resultado_sciencebenchmark.csv',
+        'prefix_fn':  lambda stem: stem.removeprefix('synth_'),
+        'query_key':  'query',
+    },
+    '4': {
         'nome':       'Dataset Science Benchmark Manual',
         'data_dir':   ROOT / 'data'       / 'dataset_sciencebenchmark_manual',
         'sqls_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark_manual' / 'sqls',
         'graf_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark_manual' / 'graficos',
         'resultado':  ROOT / 'resultados' / 'resultado_sciencebenchmark_manual.csv',
         'prefix_fn':  lambda stem: stem,
+        'query_key':  'query',
     },
 }
 
 MENU = """
-╔══════════════════════════════════════════════════╗
-║      SQL Complexity Analysis Pipeline           ║
-╠══════════════════════════════════════════════════╣
-║  1. Dataset Jamily.                              ║
-║  2. Dataset Science Benchmark                    ║
-║  3. Dataset Science Benchmark Manual             ║
-║  0. Sair                                         ║
-╚══════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════╗
+║        SQL Complexity Analysis Pipeline             ║
+╠══════════════════════════════════════════════════════╣
+║  1. Dataset Jamily Sintético                         ║
+║  2. Dataset Jamily Manual                            ║
+║  3. Dataset Science Benchmark Sintético              ║
+║  4. Dataset Science Benchmark Manual                 ║
+║  0. Sair                                             ║
+╚══════════════════════════════════════════════════════╝
 """
 
 
@@ -57,7 +70,7 @@ def run_dataset(cfg: dict) -> None:
     print(f"\n=== Etapa 1: Extração ({cfg['nome']}) ===")
     for json_file in json_files:
         prefix = cfg['prefix_fn'](json_file.stem) if cfg['prefix_fn'] else None
-        extract(json_file, cfg['sqls_dir'], prefix=prefix)
+        extract(json_file, cfg['sqls_dir'], prefix=prefix, query_key=cfg['query_key'])
 
     print(f"\n=== Etapa 2: Classificação de Complexidade ===")
     cfg['resultado'].parent.mkdir(parents=True, exist_ok=True)

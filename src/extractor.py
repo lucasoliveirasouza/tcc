@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 
-def extract(input_file: Path, output_dir: Path, prefix: str | None = None) -> int:
+def extract(input_file: Path, output_dir: Path, prefix: str | None = None, query_key: str = 'query') -> int:
     """Lê o JSON e salva cada query como arquivo .sql individual.
 
     O nome do arquivo será sql_{prefix}_{i:04d}.sql quando prefix for informado,
@@ -16,7 +16,7 @@ def extract(input_file: Path, output_dir: Path, prefix: str | None = None) -> in
 
     count = 0
     for i, entry in enumerate(data, start=1):
-        query = entry.get('query', '').strip()
+        query = entry.get(query_key, '').strip()
         if query:
             name = f'sql_{prefix}_{i:04d}.sql' if prefix else f'sql_{i:04d}.sql'
             (output_dir / name).write_text(query, encoding='utf-8')

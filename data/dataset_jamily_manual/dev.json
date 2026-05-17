@@ -1,0 +1,802 @@
+[
+  {
+    "question_id": 0,
+    "db_id": "ifg_trabalho",
+    "question": "Quanto tempo em meses o servidor de siape 1324561 possui de efetivo serviço?",
+    "evidence": "",
+    "SQL": "SELECT (tempo_efetivo / 365.0) * 12 AS tempo_em_meses FROM servidor WHERE pk_siape = 1324561",
+    "difficulty": ""
+  },
+  {
+    "question_id": 1,
+    "db_id": "ifg_trabalho",
+    "question": "Qual é a maior titulação do servidor de siape 1324561?",
+    "evidence": "",
+    "SQL": "SELECT titulacao FROM servidor WHERE pk_siape = 1324561",
+    "difficulty": ""
+  },
+  {
+    "question_id": 2,
+    "db_id": "ifg_trabalho",
+    "question": "Há quantos meses o servidor Sérgio Daniel Carvalho está em efetivo exercício?",
+    "evidence": "",
+    "SQL": "SELECT (tempo_efetivo / 365.0) * 12 AS tempo_em_meses FROM servidor WHERE LOWER(nome_completo) LIKE LOWER('Sergio Daniel Carvalho%')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 3,
+    "db_id": "ifg_trabalho",
+    "question": "Qual é a titulação acadêmica mais elevada do servidor Sérgio Daniel Carvalho?",
+    "evidence": "",
+    "SQL": "SELECT titulacao FROM servidor WHERE LOWER(nome_completo) LIKE LOWER('Sergio Daniel Carvalho%')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 4,
+    "db_id": "ifg_trabalho",
+    "question": "Qual é o maior grau acadêmico obtido pelo servidor Daniel Xavier?",
+    "evidence": "",
+    "SQL": "SELECT titulacao FROM servidor WHERE LOWER(nome_completo) LIKE LOWER('Daniel Xavier%')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 5,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas disciplinas foram ministradas por semestre para o Ensino Médio no IFG pelo servidor de siape 1324561 nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COALESCE(SUM(ceil((CAST(strftime('%m', data_fim) AS REAL) - CAST(strftime('%m', data_inicio) AS REAL))/6)), 0) AS pontuacao FROM servidor INNER JOIN turma ON servidor.pk_siape = turma.fk_servidor INNER JOIN disciplina_curso ON turma.fk_disciplina_curso = disciplina_curso.pk INNER JOIN curso ON disciplina_curso.fk_curso = curso.pk WHERE (turma.data_inicio >= DATE('now', '-5 years') OR turma.data_fim IS NULL) AND servidor.pk_siape = 1324561 AND curso.nivel = 'ENSINO MEDIO' AND curso.modalidade = 'INTEGRADO' AND turma.dependencia = 0",
+    "difficulty": ""
+  },
+  {
+    "question_id": 6,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas disciplinas foram ministradas para a Graduação no IFG pelo servidor de siape 1324561 nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS pontuacao FROM servidor INNER JOIN turma ON servidor.pk_siape = turma.fk_servidor INNER JOIN disciplina_curso ON turma.fk_disciplina_curso = disciplina_curso.pk INNER JOIN curso ON disciplina_curso.fk_curso = curso.pk WHERE (turma.data_inicio >= DATE('now', '-5 years') OR turma.data_fim IS NULL) AND servidor.pk_siape = 1324561 AND curso.nivel = 'SUPERIOR' AND turma.dependencia = 0",
+    "difficulty": ""
+  },
+  {
+    "question_id": 7,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas disciplinas foram ministradas por semestre para o Ensino Médio na modalidade EJA no IFG pelo servidor de siape 1324561 nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COALESCE(SUM(ceil((CAST(strftime('%m', data_fim) AS REAL) - CAST(strftime('%m', data_inicio) AS REAL))/6)), 0) AS pontuacao FROM servidor INNER JOIN turma ON servidor.pk_siape = turma.fk_servidor INNER JOIN disciplina_curso ON turma.fk_disciplina_curso = disciplina_curso.pk INNER JOIN curso ON disciplina_curso.fk_curso = curso.pk WHERE (turma.data_inicio >= DATE('now', '-5 years') OR turma.data_fim IS NULL) AND servidor.pk_siape = 1324561 AND curso.nivel = 'ENSINO MEDIO' AND curso.modalidade = 'INTEGRADO - EJA' AND turma.dependencia = 0",
+    "difficulty": ""
+  },
+  {
+    "question_id": 8,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas disciplinas foram ministradas para a pós-graduação lato sensu no IFG pelo servidor de siape 1324561 nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS pontuacao FROM servidor INNER JOIN turma ON servidor.pk_siape = turma.fk_servidor INNER JOIN disciplina_curso ON turma.fk_disciplina_curso = disciplina_curso.pk INNER JOIN curso ON disciplina_curso.fk_curso = curso.pk WHERE (turma.data_inicio >= DATE('now', '-5 years') OR turma.data_fim IS NULL) AND servidor.pk_siape = 1324561 AND curso.nivel = 'POS-GRADUACAO LATO SENSU' AND turma.dependencia = 0",
+    "difficulty": ""
+  },
+  {
+    "question_id": 9,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 participou de quantos projetos de ensino cadastrados no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'ENSINO' AND (servidor_proj.papel = 'PARTICIPANTE' OR servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR') AND servidor.pk_siape = 1324561",
+    "difficulty": ""
+  },
+  {
+    "question_id": 10,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 foi autor ou coordenador de quantos projetos de ensino cadastrados no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'ENSINO' AND (servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR') AND servidor.pk_siape = 1324561",
+    "difficulty": ""
+  },
+  {
+    "question_id": 11,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas disciplinas, por semestre, o servidor Sérgio Daniel Carvalho ministrou no Ensino Médio do IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COALESCE(SUM(ceil((CAST(strftime('%m', data_fim) AS REAL) - CAST(strftime('%m', data_inicio) AS REAL))/6)), 0) AS pontuacao FROM servidor INNER JOIN turma ON servidor.pk_siape = turma.fk_servidor INNER JOIN disciplina_curso ON turma.fk_disciplina_curso = disciplina_curso.pk INNER JOIN curso ON disciplina_curso.fk_curso = curso.pk WHERE (turma.data_inicio >= DATE('now', '-5 years') OR turma.data_fim IS NULL) AND LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND curso.nivel = 'ENSINO MEDIO' AND curso.modalidade = 'INTEGRADO' AND turma.dependencia = 0",
+    "difficulty": ""
+  },
+  {
+    "question_id": 12,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas disciplinas o servidor Sérgio Daniel Carvalho ministrou na Graduação do IFG ao longo dos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS pontuacao FROM servidor INNER JOIN turma ON servidor.pk_siape = turma.fk_servidor INNER JOIN disciplina_curso ON turma.fk_disciplina_curso = disciplina_curso.pk INNER JOIN curso ON disciplina_curso.fk_curso = curso.pk WHERE (turma.data_inicio >= DATE('now', '-5 years') OR turma.data_fim IS NULL) AND LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND curso.nivel = 'SUPERIOR' AND turma.dependencia = 0",
+    "difficulty": ""
+  },
+  {
+    "question_id": 13,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas disciplinas, por semestre, o servidor Sérgio Daniel Carvalho ministrou no Ensino Médio na modalidade EJA no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COALESCE(SUM(ceil((CAST(strftime('%m', data_fim) AS REAL) - CAST(strftime('%m', data_inicio) AS REAL))/6)), 0) AS pontuacao FROM servidor INNER JOIN turma ON servidor.pk_siape = turma.fk_servidor INNER JOIN disciplina_curso ON turma.fk_disciplina_curso = disciplina_curso.pk INNER JOIN curso ON disciplina_curso.fk_curso = curso.pk WHERE (turma.data_inicio >= DATE('now', '-5 years') OR turma.data_fim IS NULL) AND LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND curso.nivel = 'ENSINO MEDIO' AND curso.modalidade = 'INTEGRADO - EJA' AND turma.dependencia = 0",
+    "difficulty": ""
+  },
+  {
+    "question_id": 14,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas disciplinas o servidor Sérgio Daniel Carvalho ministrou em cursos de pós-graduação lato sensu no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS pontuacao FROM servidor INNER JOIN turma ON servidor.pk_siape = turma.fk_servidor INNER JOIN disciplina_curso ON turma.fk_disciplina_curso = disciplina_curso.pk INNER JOIN curso ON disciplina_curso.fk_curso = curso.pk WHERE (turma.data_inicio >= DATE('now', '-5 years') OR turma.data_fim IS NULL) AND LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND curso.nivel = 'POS-GRADUACAO LATO SENSU' AND turma.dependencia = 0",
+    "difficulty": ""
+  },
+  {
+    "question_id": 15,
+    "db_id": "ifg_trabalho",
+    "question": "Em quantos projetos de ensino cadastrados no IFG o servidor Sérgio Daniel Carvalho participou nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'ENSINO' AND (servidor_proj.papel = 'PARTICIPANTE' OR servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR') AND LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 16,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos projetos de ensino cadastrados no IFG, nos últimos cinco anos, foram de autoria ou coordenação do servidor Sérgio Daniel Carvalho?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'ENSINO' AND (servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR') AND LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 17,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 participou de quantos projetos de pesquisa cadastrados no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE servidor.pk_siape = 1324561 AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'PESQUISA' AND (servidor_proj.papel = 'PARTICIPANTE' OR servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 18,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 foi autor ou coordenador de quantos projetos de pesquisa cadastrados no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE servidor.pk_siape = 1324561 AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'PESQUISA' AND (servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 19,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas vezes o servidor de siape 1324561 participou de núcleos de pesquisa cadastrado no Diretório Lattes/CNPQ?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_p_g_de_pesq ON servidor.pk_siape = servidor_p_g_de_pesq.fk_siape WHERE servidor.pk_siape = 1324561",
+    "difficulty": ""
+  },
+  {
+    "question_id": 20,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas vezes o servidor de siape 1324561 foi coordenador de núcleo de pesquisa cadastrado no Diretório de Grupos de Pesquisa do CNPq e certificado pelo IFG?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_p_g_de_pesq ON servidor.pk_siape = servidor_p_g_de_pesq.fk_siape WHERE servidor.pk_siape = 1324561 AND servidor_p_g_de_pesq.lider = 1",
+    "difficulty": ""
+  },
+  {
+    "question_id": 21,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 orientou quantos Trabalho de Conclusão de Curso de graduação no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_tcc ON servidor.pk_siape = servidor_tcc.fk_siape INNER JOIN tcc ON servidor_tcc.fk_tcc = tcc.pk WHERE servidor.pk_siape = 1324561 AND tcc.ano_letivo >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND tcc.nivel = 'GRADUACAO' AND tcc.tipo = 'TCC (TRABALHO DE CONCLUSAO DE CURSO)'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 22,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 orientou quantos Trabalho Iniciação Científica e Tecnológica no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_orientacao ON servidor.pk_siape = lattes_orientacao.fk_siape WHERE servidor.pk_siape = 1324561 AND lattes_orientacao.tipo = 'INICIACAO CIENTIFICA' AND lattes_orientacao.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5",
+    "difficulty": ""
+  },
+  {
+    "question_id": 23,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 orientou quantos Trabalho de Conclusão de Curso de especialização no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_tcc ON servidor.pk_siape = servidor_tcc.fk_siape INNER JOIN tcc ON servidor_tcc.fk_tcc = tcc.pk WHERE servidor.pk_siape = 1324561 AND tcc.ano_letivo >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND tcc.modalidade = 'ESPECIALIZACAO' AND tcc.tipo = 'TCC (TRABALHO DE CONCLUSAO DE CURSO)'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 24,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 orientou quantos trabalho de mestrado no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_tcc ON servidor.pk_siape = servidor_tcc.fk_siape INNER JOIN tcc ON servidor_tcc.fk_tcc = tcc.pk WHERE servidor.pk_siape = 1324561 AND tcc.ano_letivo >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND tcc.modalidade = 'MESTRADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 25,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 orientou quantos trabalhos de doutorado no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_tcc ON servidor.pk_siape = servidor_tcc.fk_siape INNER JOIN tcc ON servidor_tcc.fk_tcc = tcc.pk WHERE servidor.pk_siape = 1324561 AND tcc.ano_letivo >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND tcc.modalidade = 'DOUTORADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 26,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 participou de quantas bancas de TCC no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_banca ON servidor.pk_siape = lattes_p_banca.fk_siape INNER JOIN lattes_banca ON lattes_p_banca.fk_banca = lattes_banca.pk WHERE servidor.pk_siape = 1324561 AND lattes_banca.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_banca.natureza = 'GRADUACAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 27,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 participou de quantas bancas de especialização no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_banca ON servidor.pk_siape = lattes_p_banca.fk_siape INNER JOIN lattes_banca ON lattes_p_banca.fk_banca = lattes_banca.pk WHERE servidor.pk_siape = 1324561 AND lattes_banca.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_banca.natureza = 'CURSO DE APERFEICOAMENTO/ESPECIALIZACAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 28,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 participou de quantas bancas de mestrado no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_banca ON servidor.pk_siape = lattes_p_banca.fk_siape INNER JOIN lattes_banca ON lattes_p_banca.fk_banca = lattes_banca.pk WHERE servidor.pk_siape = 1324561 AND lattes_banca.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_banca.natureza = 'MESTRADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 29,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 participou de quantas bancas de doutorado no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_banca ON servidor.pk_siape = lattes_p_banca.fk_siape INNER JOIN lattes_banca ON lattes_p_banca.fk_banca = lattes_banca.pk WHERE servidor.pk_siape = 1324561 AND lattes_banca.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_banca.natureza = 'DOUTORADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 30,
+    "db_id": "ifg_trabalho",
+    "question": "Em quantos projetos de pesquisa cadastrados no IFG o servidor Sérgio Daniel Carvalho participou nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'PESQUISA' AND (servidor_proj.papel = 'PARTICIPANTE' OR servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 31,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos projetos de pesquisa cadastrados no IFG foram de autoria ou coordenação do servidor Sérgio Daniel Carvalho nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'PESQUISA' AND (servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 32,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas vezes o servidor Sérgio Daniel Carvalho integrou núcleos de pesquisa cadastrados no Diretório de Grupos de Pesquisa do CNPq?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_p_g_de_pesq ON servidor.pk_siape = servidor_p_g_de_pesq.fk_siape WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 33,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas vezes o servidor Sérgio Daniel Carvalho atuou como coordenador de núcleo de pesquisa cadastrado no Diretório de Grupos de Pesquisa do CNPq e certificado pelo IFG?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_p_g_de_pesq ON servidor.pk_siape = servidor_p_g_de_pesq.fk_siape WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND servidor_p_g_de_pesq.lider = 1",
+    "difficulty": ""
+  },
+  {
+    "question_id": 34,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos Trabalhos de Conclusão de Curso (TCC) de graduação o servidor Sérgio Daniel Carvalho orientou no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_tcc ON servidor.pk_siape = servidor_tcc.fk_siape INNER JOIN tcc ON servidor_tcc.fk_tcc = tcc.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND tcc.ano_letivo >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND tcc.nivel = 'GRADUACAO' AND tcc.tipo = 'TCC (TRABALHO DE CONCLUSAO DE CURSO)'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 35,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos trabalhos de Iniciação Científica e Tecnológica foram orientados pelo servidor Sérgio Daniel Carvalho no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_orientacao ON servidor.pk_siape = lattes_orientacao.fk_siape WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND lattes_orientacao.tipo = 'INICIACAO CIENTIFICA' AND lattes_orientacao.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5",
+    "difficulty": ""
+  },
+  {
+    "question_id": 36,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos Trabalhos de Conclusão de Curso (TCC) de especialização o servidor Sérgio Daniel Carvalho orientou no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_tcc ON servidor.pk_siape = servidor_tcc.fk_siape INNER JOIN tcc ON servidor_tcc.fk_tcc = tcc.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND tcc.ano_letivo >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND tcc.modalidade = 'ESPECIALIZACAO' AND tcc.tipo = 'TCC (TRABALHO DE CONCLUSAO DE CURSO)'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 37,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos trabalhos de mestrado foram orientados pelo servidor Sérgio Daniel Carvalho no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_tcc ON servidor.pk_siape = servidor_tcc.fk_siape INNER JOIN tcc ON servidor_tcc.fk_tcc = tcc.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND tcc.ano_letivo >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND tcc.modalidade = 'MESTRADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 38,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos trabalhos de doutorado foram orientados pelo servidor Sérgio Daniel Carvalho no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_tcc ON servidor.pk_siape = servidor_tcc.fk_siape INNER JOIN tcc ON servidor_tcc.fk_tcc = tcc.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND tcc.ano_letivo >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND tcc.modalidade = 'DOUTORADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 39,
+    "db_id": "ifg_trabalho",
+    "question": "Em quantas bancas de TCC de graduação o servidor Sérgio Daniel Carvalho participou no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_banca ON servidor.pk_siape = lattes_p_banca.fk_siape INNER JOIN lattes_banca ON lattes_p_banca.fk_banca = lattes_banca.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND lattes_banca.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_banca.natureza = 'GRADUACAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 40,
+    "db_id": "ifg_trabalho",
+    "question": "Em quantas bancas de TCC de especialização o servidor Sérgio Daniel Carvalho participou no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_banca ON servidor.pk_siape = lattes_p_banca.fk_siape INNER JOIN lattes_banca ON lattes_p_banca.fk_banca = lattes_banca.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND lattes_banca.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_banca.natureza = 'CURSO DE APERFEICOAMENTO/ESPECIALIZACAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 41,
+    "db_id": "ifg_trabalho",
+    "question": "Em quantas bancas de mestrado o servidor Sérgio Daniel Carvalho participou no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_banca ON servidor.pk_siape = lattes_p_banca.fk_siape INNER JOIN lattes_banca ON lattes_p_banca.fk_banca = lattes_banca.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND lattes_banca.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_banca.natureza = 'MESTRADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 42,
+    "db_id": "ifg_trabalho",
+    "question": "Em quantas bancas de doutorado o servidor Sérgio Daniel Carvalho participou no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_banca ON servidor.pk_siape = lattes_p_banca.fk_siape INNER JOIN lattes_banca ON lattes_p_banca.fk_banca = lattes_banca.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND lattes_banca.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_banca.natureza = 'DOUTORADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 43,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas supervisões de estágio curricular ou monitoria no IFG o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(DISTINCT COALESCE(estagio.id_aluno, '') || COALESCE(estagio.empresa, '')) AS quantidade FROM servidor INNER JOIN estagio ON servidor.pk_siape = estagio.fk_siape WHERE servidor.pk_siape = 1324561 AND (estagio.data_fim >= DATE('now', '-5 years') OR estagio.data_fim IS NULL)",
+    "difficulty": ""
+  },
+  {
+    "question_id": 44,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas organizações de eventos no IFG o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodtec ON servidor.pk_siape = lattes_p_prodtec.fk_siape INNER JOIN lattes_prodtec ON lattes_p_prodtec.fk_prodtec = lattes_prodtec.pk WHERE servidor.pk_siape = 1324561 AND lattes_prodtec.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodtec.natureza = 'ORGANIZACAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 45,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 participou de quantos projetos de extensão cadastrados no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE servidor.pk_siape = 1324561 AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'EXTENSAO' AND (servidor_proj.papel = 'PARTICIPANTE' OR servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 46,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 foi autor ou coordenador de quantos projetos de extensão cadastrados no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE servidor.pk_siape = 1324561 AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'EXTENSAO' AND (servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 47,
+    "db_id": "ifg_trabalho",
+    "question": "O servidor de siape 1324561 realizou quantas orientações de projetos de extensão no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE servidor.pk_siape = 1324561 AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'EXTENSAO' AND (servidor_proj.papel = 'COORDENADOR' OR servidor_proj.vinculo = 'COORIENTADOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 48,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas supervisões de estágio curricular ou de atividades de monitoria o servidor Sérgio Daniel Carvalho realizou no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(DISTINCT COALESCE(estagio.id_aluno, '') || COALESCE(estagio.empresa, '')) AS quantidade FROM servidor INNER JOIN estagio ON servidor.pk_siape = estagio.fk_siape WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND (estagio.data_fim >= DATE('now', '-5 years') OR estagio.data_fim IS NULL)",
+    "difficulty": ""
+  },
+  {
+    "question_id": 49,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos eventos o servidor Sérgio Daniel Carvalho organizou no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodtec ON servidor.pk_siape = lattes_p_prodtec.fk_siape INNER JOIN lattes_prodtec ON lattes_p_prodtec.fk_prodtec = lattes_prodtec.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND lattes_prodtec.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodtec.natureza = 'ORGANIZACAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 50,
+    "db_id": "ifg_trabalho",
+    "question": "Em quantos projetos de extensão cadastrados no IFG o servidor Sérgio Daniel Carvalho participou nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'EXTENSAO' AND (servidor_proj.papel = 'PARTICIPANTE' OR servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 51,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos projetos de extensão cadastrados no IFG foram de autoria ou coordenação do servidor Sérgio Daniel Carvalho nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'EXTENSAO' AND (servidor_proj.papel = 'COORDENADOR' OR servidor_proj.papel = 'AUTOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 52,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas orientações de projetos de extensão o servidor Sérgio Daniel Carvalho realizou no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN servidor_proj ON servidor.pk_siape = servidor_proj.fk_siape INNER JOIN proj ON servidor_proj.fk_proj = proj.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND (proj.data_termino >= DATE('now', '-5 years') OR proj.data_termino IS NULL) AND proj.tipo_projeto = 'EXTENSAO' AND (servidor_proj.papel = 'COORDENADOR' OR servidor_proj.vinculo = 'COORIENTADOR')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 53,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas publicações de livros como autor o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'LIVRO PUBLICADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 54,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas publicações de livros como organizador o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'LIVRO ORGANIZADO OU EDICAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 55,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas publicações de capítulos de livro o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'CAPITULO DE LIVRO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 56,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor de siape 1324561 publicou em periódicos ou anais de conferência com qualis A1 ou A2 nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis = 'A1' OR qualis_rev.qualis = 'A2')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 57,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor de siape 1324561 publicou em periódicos ou anais de conferência com qualis B1 ou B2 nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis = 'B1' OR qualis_rev.qualis = 'B2')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 58,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor de siape 1324561 publicou em periódicos ou anais de conferência com qualis B3 ou B4 nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis = 'B3' OR qualis_rev.qualis = 'B4')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 59,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor de siape 1324561 publicou em periódicos ou anais de conferência com qualis abaixo de B4 nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis <> '' AND qualis_rev.qualis <> 'A1' AND qualis_rev.qualis <> 'A2' AND qualis_rev.qualis <> 'B1' AND qualis_rev.qualis <> 'B2' AND qualis_rev.qualis <> 'B3' AND qualis_rev.qualis <> 'B4')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 60,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor de siape 1324561 publicou em periódicos ou anais de conferência sem qualis nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND qualis_rev.qualis = ''",
+    "difficulty": ""
+  },
+  {
+    "question_id": 61,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas publicações de texto em jornal ou revista (magazine) o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_tex_jor ON servidor.pk_siape = lattes_p_tex_jor.fk_siape INNER JOIN lattes_tex_jor ON lattes_p_tex_jor.fk_tex_jor = lattes_tex_jor.pk WHERE lattes_tex_jor.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND (lattes_tex_jor.natureza_da_producao = 'REVISTA MAGAZINE' OR lattes_tex_jor.natureza_da_producao = 'JORNAL DE NOTICIAS') AND servidor.pk_siape = 1324561",
+    "difficulty": ""
+  },
+  {
+    "question_id": 62,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas registro de patente ou registro de software o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_reg ON servidor.pk_siape = lattes_p_reg.fk_siape INNER JOIN lattes_reg ON lattes_p_reg.fk_reg = lattes_reg.pk WHERE lattes_reg.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND servidor.pk_siape = 1324561 AND (lattes_reg.tipo = 'PATENTE' OR lattes_reg.tipo = 'SOFTWARE')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 63,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos trabalhos técnicos (Ex.: softwares, produtos tecnológicos, processos ou técnicas, trabalhos técnicos, maquetes) do servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodtec ON servidor.pk_siape = lattes_p_prodtec.fk_siape INNER JOIN lattes_prodtec ON lattes_p_prodtec.fk_prodtec = lattes_prodtec.pk WHERE lattes_prodtec.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodtec.natureza <> 'ORGANIZACAO' AND servidor.pk_siape = 1324561",
+    "difficulty": ""
+  },
+  {
+    "question_id": 64,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas apresentações orais ou do tipo pôster o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_evento ON servidor.pk_siape = lattes_p_evento.fk_siape INNER JOIN lattes_evento ON lattes_p_evento.fk_evento = lattes_evento.pk WHERE servidor.pk_siape = 1324561 AND lattes_evento.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND (lattes_p_evento.tipo = 'APRESENTACAO ORAL' OR lattes_p_evento.tipo = 'ORAL PRESENTATION' OR lattes_p_evento.tipo = 'POSTER / PAINEL' OR lattes_p_evento.tipo = 'POSTER / PANEL')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 65,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos trabalhos completos em anais de congresso o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'TRABALHO EM EVENTO' AND lattes_prodbib.natureza = 'COMPLETO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 66,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos resumos simples em anais de congresso o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'RESUMO DE TRABALHOS' AND lattes_prodbib.natureza = 'RESUMO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 67,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos resumos expandidos em anais de congresso o servidor de siape 1324561 fez nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.pk_siape = 1324561 AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'RESUMO DE TRABALHOS' AND lattes_prodbib.natureza = 'RESUMO EXPANDIDO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 68,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos livros de autoria própria o servidor Sérgio Daniel Carvalho publicou nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'LIVRO PUBLICADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 69,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos livros organizados pelo servidor Sérgio Daniel Carvalho foram publicados nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'LIVRO ORGANIZADO OU EDICAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 70,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos capítulos de livros o servidor Sérgio Daniel Carvalho publicou nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'CAPITULO DE LIVRO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 71,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor Sérgio Daniel Carvalho publicou, nos últimos cinco anos, em periódicos ou anais de conferência com classificação qualis A1 ou A2?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis = 'A1' OR qualis_rev.qualis = 'A2')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 72,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor Sérgio Daniel Carvalho publicou, nos últimos cinco anos, em periódicos ou anais de conferência com classificação qualis B1 ou B2?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis = 'B1' OR qualis_rev.qualis = 'B2')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 73,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor Sérgio Daniel Carvalho publicou, nos últimos cinco anos, em periódicos ou anais de conferência com classificação qualis B3 ou B4?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis = 'B3' OR qualis_rev.qualis = 'B4')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 74,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor Sérgio Daniel Carvalho publicou, nos últimos cinco anos, em periódicos ou anais de conferência com classificação qualis abaixo de B4?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis <> '' AND qualis_rev.qualis <> 'A1' AND qualis_rev.qualis <> 'A2' AND qualis_rev.qualis <> 'B1' AND qualis_rev.qualis <> 'B2' AND qualis_rev.qualis <> 'B3' AND qualis_rev.qualis <> 'B4')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 75,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos artigos completos o servidor Sérgio Daniel Carvalho publicou, nos últimos cinco anos, em periódicos ou anais de conferência sem classificação qualis?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND qualis_rev.qualis = ''",
+    "difficulty": ""
+  },
+  {
+    "question_id": 76,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos textos o servidor Sérgio Daniel Carvalho publicou, nos últimos cinco anos, em jornais ou revistas (magazines)?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_tex_jor ON servidor.pk_siape = lattes_p_tex_jor.fk_siape INNER JOIN lattes_tex_jor ON lattes_p_tex_jor.fk_tex_jor = lattes_tex_jor.pk WHERE lattes_tex_jor.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND (lattes_tex_jor.natureza_da_producao = 'REVISTA MAGAZINE' OR lattes_tex_jor.natureza_da_producao = 'JORNAL DE NOTICIAS') AND LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 77,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos registros de patente ou de software foram efetuados pelo servidor Sérgio Daniel Carvalho nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_reg ON servidor.pk_siape = lattes_p_reg.fk_siape INNER JOIN lattes_reg ON lattes_p_reg.fk_reg = lattes_reg.pk WHERE lattes_reg.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND (lattes_reg.tipo = 'PATENTE' OR lattes_reg.tipo = 'SOFTWARE')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 78,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos trabalhos técnicos (como softwares, produtos tecnológicos, processos, técnicas, maquetes, entre outros) foram desenvolvidos pelo servidor Sérgio Daniel Carvalho nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodtec ON servidor.pk_siape = lattes_p_prodtec.fk_siape INNER JOIN lattes_prodtec ON lattes_p_prodtec.fk_prodtec = lattes_prodtec.pk WHERE lattes_prodtec.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodtec.natureza <> 'ORGANIZACAO' AND LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 79,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas apresentações orais ou em formato de pôster o servidor Sérgio Daniel Carvalho realizou nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_evento ON servidor.pk_siape = lattes_p_evento.fk_siape INNER JOIN lattes_evento ON lattes_p_evento.fk_evento = lattes_evento.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND lattes_evento.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND (lattes_p_evento.tipo = 'APRESENTACAO ORAL' OR lattes_p_evento.tipo = 'ORAL PRESENTATION' OR lattes_p_evento.tipo = 'POSTER / PAINEL' OR lattes_p_evento.tipo = 'POSTER / PANEL')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 80,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos trabalhos completos em anais de congressos o servidor Sérgio Daniel Carvalho publicou nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'TRABALHO EM EVENTO' AND lattes_prodbib.natureza = 'COMPLETO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 81,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos resumos simples em anais de congressos foram publicados pelo servidor Sérgio Daniel Carvalho nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'RESUMO DE TRABALHOS' AND lattes_prodbib.natureza = 'RESUMO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 82,
+    "db_id": "ifg_trabalho",
+    "question": "Quantos resumos expandidos em anais de congressos foram publicados pelo servidor Sérgio Daniel Carvalho nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'RESUMO DE TRABALHOS' AND lattes_prodbib.natureza = 'RESUMO EXPANDIDO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 83,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de livros de autoria própria publicados pelos servidores do campus Anápolis nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.sigla_campus = 'ANA' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'LIVRO PUBLICADO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 84,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de livros organizados publicados pelos servidores do campus Anápolis nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.sigla_campus = 'ANA' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'LIVRO ORGANIZADO OU EDICAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 85,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de capítulos de livros publicados pelos servidores do campus Aparecida de Goiânia nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.sigla_campus = 'APA' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'CAPITULO DE LIVRO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 86,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de artigos completos publicados pelos servidores do campus Aparecida de Goiânia, nos últimos cinco anos, em periódicos ou anais de conferência com classificação qualis A1 ou A2?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.sigla_campus = 'APA' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis = 'A1' OR qualis_rev.qualis = 'A2')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 87,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de artigos completos publicados pelos servidores do campus Goiânia, nos últimos cinco anos, em periódicos ou anais de conferência com classificação qualis B1 ou B2?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.sigla_campus = 'GYN' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis = 'B1' OR qualis_rev.qualis = 'B2')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 88,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de artigos completos publicados pelos servidores do campus Goiânia, nos últimos cinco anos, em periódicos ou anais de conferência com classificação qualis B3 ou B4?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.sigla_campus = 'GYN' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis = 'B3' OR qualis_rev.qualis = 'B4')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 89,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de artigos completos publicados pelos servidores do campus Formosa, nos últimos cinco anos, em periódicos ou anais de conferência com classificação qualis abaixo de B4?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.sigla_campus = 'FOR' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND (qualis_rev.qualis <> '' AND qualis_rev.qualis <> 'A1' AND qualis_rev.qualis <> 'A2' AND qualis_rev.qualis <> 'B1' AND qualis_rev.qualis <> 'B2' AND qualis_rev.qualis <> 'B3' AND qualis_rev.qualis <> 'B4')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 90,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de artigos completos publicados pelos servidores do campus Formosa, nos últimos cinco anos, em periódicos ou anais de conferência sem classificação qualis?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk INNER JOIN qualis_rev ON lattes_prodbib.fk_revista = qualis_rev.pk WHERE servidor.sigla_campus = 'FOR' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'ARTIGO' AND qualis_rev.qualis = ''",
+    "difficulty": ""
+  },
+  {
+    "question_id": 91,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de textos publicados pelos servidores do campus Inhumas, nos últimos cinco anos, em jornais ou revistas (magazines)?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_tex_jor ON servidor.pk_siape = lattes_p_tex_jor.fk_siape INNER JOIN lattes_tex_jor ON lattes_p_tex_jor.fk_tex_jor = lattes_tex_jor.pk WHERE lattes_tex_jor.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND (lattes_tex_jor.natureza_da_producao = 'REVISTA MAGAZINE' OR lattes_tex_jor.natureza_da_producao = 'JORNAL DE NOTICIAS') AND servidor.sigla_campus = 'INH'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 92,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas apresentações orais ou em formato de pôster foram realizadas pelos servidores do campus Inhumas nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_evento ON servidor.pk_siape = lattes_p_evento.fk_siape INNER JOIN lattes_evento ON lattes_p_evento.fk_evento = lattes_evento.pk WHERE servidor.sigla_campus = 'INH' AND lattes_evento.ano >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND (lattes_p_evento.tipo = 'APRESENTACAO ORAL' OR lattes_p_evento.tipo = 'ORAL PRESENTATION' OR lattes_p_evento.tipo = 'POSTER / PAINEL' OR lattes_p_evento.tipo = 'POSTER / PANEL')",
+    "difficulty": ""
+  },
+  {
+    "question_id": 93,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de trabalhos completos publicados em anais de congressos pelos servidores do campus Jataí nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.sigla_campus = 'JAT' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'TRABALHO EM EVENTO' AND lattes_prodbib.natureza = 'COMPLETO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 94,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de resumos simples publicados em anais de congressos pelos servidores do campus Valparaíso nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.sigla_campus = 'VAL' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'RESUMO DE TRABALHOS' AND lattes_prodbib.natureza = 'RESUMO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 95,
+    "db_id": "ifg_trabalho",
+    "question": "Qual foi a quantidade de resumos expandidos publicados em anais de congressos pelos servidores do campus Águas Lindas nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN lattes_p_prodbib ON servidor.pk_siape = lattes_p_prodbib.fk_siape INNER JOIN lattes_prodbib ON lattes_p_prodbib.fk_prodbib = lattes_prodbib.pk WHERE servidor.sigla_campus = 'LIN' AND CAST(lattes_prodbib.ano AS INTEGER) >= CAST(strftime('%Y', 'now') AS INTEGER) - 5 AND lattes_prodbib.tipo = 'RESUMO DE TRABALHOS' AND lattes_prodbib.natureza = 'RESUMO EXPANDIDO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 96,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas vezes o servidor de siape 1324561 ocupou cargo de direção (CD/FG/FCC) no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN cargo ON servidor.pk_siape = cargo.fk_siape WHERE servidor.pk_siape = 1324561 AND (cargo.data_saida >= DATE('now') OR cargo.data_saida IS NULL) AND cargo.funcao = 'CARGO DE DIRECAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 97,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas vezes o servidor de siape 1324561 ocupou cargo de direção (CD/FG/FCC) em substituição no IFG nos últimos 5 anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN cargo ON servidor.pk_siape = cargo.fk_siape WHERE servidor.pk_siape = 1324561 AND (cargo.data_saida >= DATE('now') OR cargo.data_saida IS NULL) AND cargo.funcao = 'SUBSTITUICAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 98,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas vezes o servidor Sérgio Daniel Carvalho exerceu função ou cargo de direção (CD, FG ou FCC) no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN cargo ON servidor.pk_siape = cargo.fk_siape WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND (cargo.data_saida >= DATE('now') OR cargo.data_saida IS NULL) AND cargo.funcao = 'CARGO DE DIRECAO'",
+    "difficulty": ""
+  },
+  {
+    "question_id": 99,
+    "db_id": "ifg_trabalho",
+    "question": "Quantas vezes o servidor Sérgio Daniel Carvalho atuou em substituição em cargo ou função de direção (CD, FG ou FCC) no IFG nos últimos cinco anos?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) AS quantidade FROM servidor INNER JOIN cargo ON servidor.pk_siape = cargo.fk_siape WHERE LOWER(servidor.nome_completo) LIKE LOWER('Sergio Daniel Carvalho%') AND (cargo.data_saida >= DATE('now') OR cargo.data_saida IS NULL) AND cargo.funcao = 'SUBSTITUICAO'",
+    "difficulty": ""
+  }
+]
