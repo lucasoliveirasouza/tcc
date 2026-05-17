@@ -32,7 +32,7 @@ DATASETS = {
         'sqls_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark_manual' / 'sqls',
         'graf_dir':   ROOT / 'output'     / 'dataset_sciencebenchmark_manual' / 'graficos',
         'resultado':  ROOT / 'resultados' / 'resultado_sciencebenchmark_manual.csv',
-        'prefix_fn':  lambda stem: stem.removeprefix('dev_'),
+        'prefix_fn':  lambda stem: stem,
     },
 }
 
