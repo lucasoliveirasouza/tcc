@@ -46,6 +46,13 @@ DATASETS = {
         'prefix_fn':  lambda stem: stem,
         'query_key':  'query',
     },
+    '5': {
+        'nome':        'Dataset Spider 2',
+        'sqls_dir':    ROOT / 'output'     / 'dataset_spider2' / 'sqls',
+        'graf_dir':    ROOT / 'output'     / 'dataset_spider2' / 'graficos',
+        'resultado':   ROOT / 'resultados' / 'resultado_spider2.csv',
+        'only_classify': True,
+    },
 }
 
 MENU = """
@@ -56,23 +63,25 @@ MENU = """
 ║  2. Dataset Jamily Manual                            ║
 ║  3. Dataset Science Benchmark Sintético              ║
 ║  4. Dataset Science Benchmark Manual                 ║
+║  5. Dataset Spider 2                                 ║
 ║  0. Sair                                             ║
 ╚══════════════════════════════════════════════════════╝
 """
 
 
 def run_dataset(cfg: dict) -> None:
-    json_files = sorted(cfg['data_dir'].glob('*.json'))
-    if not json_files:
-        print(f"Nenhum arquivo JSON encontrado em '{cfg['data_dir']}'.")
-        sys.exit(1)
+    if not cfg.get('only_classify'):
+        json_files = sorted(cfg['data_dir'].glob('*.json'))
+        if not json_files:
+            print(f"Nenhum arquivo JSON encontrado em '{cfg['data_dir']}'.")
+            sys.exit(1)
 
-    print(f"\n=== Etapa 1: Extração ({cfg['nome']}) ===")
-    for json_file in json_files:
-        prefix = cfg['prefix_fn'](json_file.stem) if cfg['prefix_fn'] else None
-        extract(json_file, cfg['sqls_dir'], prefix=prefix, query_key=cfg['query_key'])
+        print(f"\n=== Etapa 1: Extração ({cfg['nome']}) ===")
+        for json_file in json_files:
+            prefix = cfg['prefix_fn'](json_file.stem) if cfg['prefix_fn'] else None
+            extract(json_file, cfg['sqls_dir'], prefix=prefix, query_key=cfg['query_key'])
 
-    print(f"\n=== Etapa 2: Classificação de Complexidade ===")
+    print(f"\n=== Classificação de Complexidade ({cfg['nome']}) ===")
     cfg['resultado'].parent.mkdir(parents=True, exist_ok=True)
     process_folder(cfg['sqls_dir'], cfg['resultado'], cfg['graf_dir'])
 

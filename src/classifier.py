@@ -174,7 +174,6 @@ def process_folder(folder: Path, output_csv: Path, graf_dir: Path) -> None:
         sql = path.read_text(encoding='utf-8')
         category, _, _ = classify(sql)
         rows.append({'arquivo': path.name, 'classificacao': category})
-        print(f"  {path.name:<30} → {category}")
 
     output_csv.parent.mkdir(parents=True, exist_ok=True)
     with output_csv.open('w', newline='', encoding='utf-8') as f:
